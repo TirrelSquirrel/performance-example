@@ -1,10 +1,5 @@
 const express = require("express");
-const cluster = require("cluster");
-const os = require("os");
-
 const app = express();
-
-cluster.schedulingPolicy = cluster.SCHED_RR;
 
 function delay(duration) {
   const startTime = Date.now();
@@ -24,14 +19,6 @@ app.get("/timer", (req, res) => {
 });
 
 console.log("Running server.js");
-if (cluster.isMaster) {
-  console.log("Master has been started..");
-  const NUM_WORKERS = os.cpus().length;
-  for (let i = 0; i < NUM_WORKERS; i++) {
-    cluster.fork();
-    console.log(`${i+1} total of forked`)
-  }
-} else {
-  console.log("Worker proccess started");
-  app.listen(5000);
-}
+
+console.log("Worker proccess started");
+app.listen(5000);
