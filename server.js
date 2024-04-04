@@ -14,8 +14,8 @@ app.get("/", (req, res) => {
 
 app.get("/timer", (req, res) => {
   //delay the response
-  delay(9000);
-  res.send(`Ding dong ${process.pid}`);
+  delay(4000);
+  res.send(`Beep beep ${process.pid}`);
 });
 
 console.log("Running server.js");
